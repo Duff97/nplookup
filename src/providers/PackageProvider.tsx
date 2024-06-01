@@ -1,6 +1,5 @@
-'use client'
-import { IPackage } from '@/interface'
 import React, { createContext, useContext, useState } from 'react'
+import { IPackage } from '../interface'
 
 interface IPackageContext {
   packages: IPackage[]
@@ -23,6 +22,8 @@ const PackageProvider = ({children} : {children: React.ReactNode}) => {
 const usePackage = () => {
   const {packages, setPackages} = useContext(PackageContext)
 
+  const packageLoaded = packages.length > 0
+
   const loadPackages = (strPackages : string) => {
     const packageJson = JSON.parse(strPackages)
 
@@ -41,7 +42,13 @@ const usePackage = () => {
     setPackages(dependencies)
   }
 
-  return {packages, loadPackages}
+  const clearPackages = () => {
+    setPackages([])
+  }
+
+  
+
+  return {packages, packageLoaded, loadPackages, clearPackages}
 }
 
 export {PackageProvider, usePackage}
