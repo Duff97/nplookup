@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { IPackage, IPackageDetails } from '../interface'
 
 interface IPackageContext {
@@ -10,7 +10,13 @@ const PackageContext = createContext<IPackageContext>({packages: [], setPackages
 
 const PackageProvider = ({children} : {children: React.ReactNode}) => {
 
-  const [packages, setPackages] = useState<IPackage[]>([])
+  const storedPackages = window.localStorage.getItem('packages')
+  const defaultPackages = storedPackages ? JSON.parse(storedPackages) : []
+  const [packages, setPackages] = useState<IPackage[]>(defaultPackages)
+
+  useEffect(() => {
+    window.localStorage.setItem('packages', JSON.stringify(packages))
+  }, [packages])
 
   return (
     <PackageContext.Provider value={{packages, setPackages}}>
@@ -45,7 +51,7 @@ const usePackage = () => {
   }
 
   const setPackageDetails = async (name: string) => {
-    const fetchUrl = `${import.meta.env.VITE_NPM_REGISTRY_URL}${name}`
+    const fetchUrl = `${import.meta.env.VITE_NPM_REGISTRY_URL}${name}/latest`
   
     const response = await fetch(fetchUrl)
     const details : IPackageDetails = await response.json()
