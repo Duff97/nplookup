@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
-import { IPackage } from '../interface'
+import { IPackage, IPackageDetails } from '../interface'
 
 interface IPackageContext {
   packages: IPackage[]
@@ -27,8 +27,6 @@ const usePackage = () => {
   const loadPackages = (strPackages : string) => {
     const packageJson = JSON.parse(strPackages)
 
-    console.log(packageJson)
-
     const dependencies: IPackage[] = []
 
     for (const data in packageJson) {
@@ -46,9 +44,30 @@ const usePackage = () => {
     setPackages([])
   }
 
+  const setPackageDetails = async (name: string) => {
+    const fetchUrl = `${import.meta.env.VITE_NPM_REGISTRY_URL}${name}`
+  
+    const response = await fetch(fetchUrl)
+    const details : IPackageDetails = await response.json()
+
+    const newPackages = packages.map((item) => {
+      
+      if (item.name == name){
+        return {
+          ...item,
+          details
+        }
+      }
+      
+      return item
+    })
+
+    setPackages(newPackages)
+  }
+
   
 
-  return {packages, packageLoaded, loadPackages, clearPackages}
+  return {packages, packageLoaded, loadPackages, clearPackages, setPackageDetails}
 }
 
 export {PackageProvider, usePackage}

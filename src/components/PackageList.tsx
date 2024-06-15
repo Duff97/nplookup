@@ -1,15 +1,6 @@
 import { ArrowLeft } from "lucide-react"
-import { IPackage } from "../interface"
 import { usePackage } from "../providers/PackageProvider"
-
-const PackageItem = ({packageItem} : {packageItem: IPackage}) => {
-  return (
-    <div className="max-w-[1200px] w-[95vw] bg-gray-800 text-white py-5 px-3 rounded-xl">
-      {packageItem.name}
-      {packageItem.version}
-    </div>
-  )
-}
+import PackageItem from "./PackageItem"
 
 const PackageList = () => {
   
