@@ -1,19 +1,27 @@
-import { Home } from 'lucide-react'
-import { IPackageDetails } from '../interface'
+import { Home, LoaderPinwheel } from 'lucide-react'
+import { usePackage } from '../providers/PackageProvider'
 
-const PackageDetails = ({details} : {details: IPackageDetails}) => {
+const PackageDetails = () => {
+
+  const {selectedPackage, isLoading} = usePackage()
+
   return (
-    <div className='w-[95%] p-5 mx-auto bg-gray-700 text-white rounded-b-2xl flex flex-col sm:flex-row justify-between'>
-      <div className='space-y-3'>
-        <h2 className='text-3xl'>{details.name}</h2>
-        <p>{details.description}</p>
-      </div>
-      <div className='space-y-3'>
-        <h2>Latest: <span className='text-3xl'>{details.version}</span></h2>
-        <a href={details.homepage} target='_blank' className='flex items-center gap-2'><Home /> <span className='underline'>Homepage</span></a>
-        <p>License: {details.license}</p>
-      </div>
-    </div>
+    <>
+      {isLoading && <div className='h-full w-full flex justify-center items-center'>
+        <LoaderPinwheel width={100} height={100} className='animate-spin' />
+      </div>}
+      {selectedPackage && <div>
+        <div className='space-y-3'>
+          <h2 className='text-3xl'>{selectedPackage.name}</h2>
+          <p>{selectedPackage.description}</p>
+        </div>
+        <div className='space-y-3'>
+          <h2>Latest: <span className='text-3xl'>{selectedPackage.version}</span></h2>
+          <a href={selectedPackage.homepage} target='_blank' className='flex items-center gap-2'><Home /> <span className='underline'>Homepage</span></a>
+          <p>License: {selectedPackage.license}</p>
+        </div>
+      </div>}
+    </>
   )
 }
 

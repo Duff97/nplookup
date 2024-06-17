@@ -7,9 +7,9 @@ import { AnimatePresence } from 'framer-motion';
 export default function App() {
   const {packageLoaded} = usePackage()
   return (
-    <main>
+    <main className='h-svh flex flex-col'>
       <Navbar />
-      <div className="flex flex-col items-center my-16">
+      <div className='flex-grow'>
         <AnimatePresence>
           {!packageLoaded && <PackageInput />}
         </AnimatePresence>

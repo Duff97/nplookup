@@ -14,7 +14,7 @@ const PackageInput = () => {
 
   return (
     <motion.div 
-      className='flex flex-col items-center gap-10'
+      className='flex flex-col items-center justify-center h-svh absolute top-0 w-full'
       initial={{opacity: 1, translateX: 0}}
       exit={{opacity: 0, translateX: '-100%'}}
       transition={{duration:0.5}}

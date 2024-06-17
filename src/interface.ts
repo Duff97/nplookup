@@ -1,7 +1,6 @@
 export interface IPackage {
   name: string
   version: string
-  details?: IPackageDetails
 }
 
 export interface IPackageDetails {
