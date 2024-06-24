@@ -7,7 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 export default function App() {
   const {packageLoaded} = usePackage()
   return (
-    <main className='h-svh flex flex-col'>
+    <main className='h-svh w-screen overflow-hidden flex flex-col bg-palette-1 text-palette-4'>
       <Navbar />
       <div className='flex-grow'>
         <AnimatePresence>

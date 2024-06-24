@@ -72,12 +72,16 @@ const usePackage = () => {
 
   const clearPackages = () => {
     setPackages([])
+    unselectPackage()
+  }
+
+  const unselectPackage = () => {
     setSelectedPackage(null)
   }
 
   
 
-  return {packages, selectedPackage, isLoading, packageLoaded, loadPackages, clearPackages, setPackageDetails}
+  return {packages, selectedPackage, isLoading, packageLoaded, loadPackages, clearPackages, setPackageDetails, unselectPackage}
 }
 
 export {PackageProvider, usePackage}

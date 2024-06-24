@@ -19,11 +19,11 @@ const PackageInput = () => {
       exit={{opacity: 0, translateX: '-100%'}}
       transition={{duration:0.5}}
     >
-      <div className="text-center space-y-3">
-        <h2 className='text-3xl'>Paste your package.json file</h2>
-        <h3 className="text-xl text-gray-500">Get useful details on your project!</h3>
+      <div className="text-center space-y-3 pb-3">
+        <h2 className='text-3xl text-palette-3'>Paste your package.json file</h2>
+        <h3 className="text-xl">Get useful details on your project!</h3>
       </div>
-      <textarea className='resize-none hidescroll max-w-[500px] w-[90vw] h-[300px] border rounded-2xl p-5 shadow-md' placeholder={packagePlaceholder} onPaste={handlePackagePaste} />
+      <textarea className='resize-none hidescroll max-w-[500px] w-[90vw] h-[300px] rounded-2xl p-5 shadow-lg shadow-gray-900 bg-palette-2 focus:outline outline-2 outline-palette-3' placeholder={packagePlaceholder} onPaste={handlePackagePaste} />
     </motion.div>
   )
 }
