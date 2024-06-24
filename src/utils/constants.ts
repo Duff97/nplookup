@@ -1,3 +1,5 @@
+import { IPreviewPackage } from "../interface"
+
 export const packagePlaceholder = `{
   "name": "nplookup",
   "private": true,
@@ -30,3 +32,26 @@ export const packagePlaceholder = `{
   }
 }
 `
+
+export const previewPackages : IPreviewPackage[] = [
+  {
+    name: 'React',
+    url: 'https://raw.githubusercontent.com/facebook/react/main/package.json'
+  },
+  {
+    name: 'Vue',
+    url: 'https://raw.githubusercontent.com/vuejs/core/main/package.json'
+  },
+  {
+    name: 'Angular',
+    url: 'https://raw.githubusercontent.com/angular/angular/main/package.json'
+  },
+  {
+    name: 'Jest',
+    url: 'https://raw.githubusercontent.com/jestjs/jest/main/package.json'
+  },
+  {
+    name: 'TailwindCSS',
+    url: 'https://raw.githubusercontent.com/tailwindlabs/tailwindcss/next/package.json'
+  }
+]

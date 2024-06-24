@@ -9,7 +9,7 @@ export default function App() {
   return (
     <main className='h-svh w-screen overflow-hidden flex flex-col bg-palette-1 text-palette-4'>
       <Navbar />
-      <div className='flex-grow'>
+      <div className='relative flex-grow'>
         <AnimatePresence>
           {!packageLoaded && <PackageInput />}
         </AnimatePresence>

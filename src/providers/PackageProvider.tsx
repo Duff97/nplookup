@@ -1,40 +1,40 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { IPackage, IPackageDetails } from '../interface'
+import { IPackage, IPackageDetails, IRepository } from '../interface'
 
 interface IPackageContext {
-  packages: IPackage[]
-  setPackages: React.Dispatch<React.SetStateAction<IPackage[]>>
+  repository: IRepository
+  setRepository: React.Dispatch<React.SetStateAction<IRepository>>
   selectedPackage: IPackageDetails | null
   setSelectedPackage: React.Dispatch<React.SetStateAction<IPackageDetails | null>>
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const PackageContext = createContext<IPackageContext>({packages: [], setPackages: () => {}, selectedPackage: null, setSelectedPackage: () => {}, isLoading: false, setIsLoading: () => {}})
+const PackageContext = createContext<IPackageContext>({repository: {name: '', packages: []}, setRepository: () => {}, selectedPackage: null, setSelectedPackage: () => {}, isLoading: false, setIsLoading: () => {}})
 
 const PackageProvider = ({children} : {children: React.ReactNode}) => {
 
-  const storedPackages = window.localStorage.getItem('packages')
-  const defaultPackages = storedPackages ? JSON.parse(storedPackages) : []
-  const [packages, setPackages] = useState<IPackage[]>(defaultPackages)
+  const storedRepository = window.localStorage.getItem('repository')
+  const defaultRepository = storedRepository ? JSON.parse(storedRepository) : {name: '', packages: []}
+  const [repository, setRepository] = useState<IRepository>(defaultRepository)
   const [selectedPackage, setSelectedPackage] = useState<IPackageDetails | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    window.localStorage.setItem('packages', JSON.stringify(packages))
-  }, [packages])
+    window.localStorage.setItem('repository', JSON.stringify(repository))
+  }, [repository])
 
   return (
-    <PackageContext.Provider value={{packages, setPackages, selectedPackage, setSelectedPackage, isLoading, setIsLoading}}>
+    <PackageContext.Provider value={{repository, setRepository, selectedPackage, setSelectedPackage, isLoading, setIsLoading}}>
       {children}
     </PackageContext.Provider>
   )
 }
 
 const usePackage = () => {
-  const {packages, setPackages, selectedPackage, setSelectedPackage, isLoading, setIsLoading} = useContext(PackageContext)
+  const {repository, setRepository, selectedPackage, setSelectedPackage, isLoading, setIsLoading} = useContext(PackageContext)
 
-  const packageLoaded = packages.length > 0
+  const packageLoaded = repository.packages.length > 0
 
   const loadPackages = (strPackages : string) => {
     const packageJson = JSON.parse(strPackages)
@@ -49,7 +49,10 @@ const usePackage = () => {
       }
     }
 
-    setPackages(dependencies)
+    setRepository({
+      name: packageJson.name ?? '',
+      packages: dependencies
+    })
   }
 
   const fetchPackageDetails = async (name: string) => {
@@ -71,7 +74,10 @@ const usePackage = () => {
   }
 
   const clearPackages = () => {
-    setPackages([])
+    setRepository({
+      ...repository,
+      packages: []
+    })
     unselectPackage()
   }
 
@@ -81,7 +87,7 @@ const usePackage = () => {
 
   
 
-  return {packages, selectedPackage, isLoading, packageLoaded, loadPackages, clearPackages, setPackageDetails, unselectPackage}
+  return {repository, selectedPackage, isLoading, packageLoaded, loadPackages, clearPackages, setPackageDetails, unselectPackage}
 }
 
 export {PackageProvider, usePackage}

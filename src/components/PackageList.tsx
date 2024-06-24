@@ -6,7 +6,7 @@ import Sheet from "./Sheet"
 
 const PackageList = () => {
   
-  const {packages, clearPackages, setPackageDetails} = usePackage()
+  const {repository, clearPackages, setPackageDetails} = usePackage()
 
   const handleReturnClick = () => {
     clearPackages()
@@ -20,13 +20,16 @@ const PackageList = () => {
       className="h-full w-screen flex overflow-hidden"
     >
       <div className="absolute w-full sm:w-[67%] left-0 bottom-0 top-0 space-y-10 px-3 sm:px-10 pt-10 flex-grow overflow-y-auto overflow-x-hidden pb-10">
-        <button onClick={handleReturnClick} className="flex gap-3 bg-palette-3 text-palette-1 p-2 rounded-2xl">
-          <ArrowLeft className="m-auto" />
-        </button>
+        <div className="flex items-center gap-3 text-xl lgtext-3xl font-semibold">
+          <button onClick={handleReturnClick} className="flex gap-3 bg-palette-3 text-palette-1 p-2 rounded-2xl">
+            <ArrowLeft className="m-auto" />
+          </button>
+          <h1>{`${repository.name} dependencies`}</h1>
+        </div>
         <div className="flex gap-3 flex-wrap">
-          {packages.map((item) => (
-            <button key={item.name} onClick={() => { setPackageDetails(item.name) }} className="bg-palette-3 text-palette-1 rounded-2xl p-5 flex flex-col gap-2 font-semibold shadow-md shadow-black">
-              <h2 className="text-xl">{item.name}</h2>
+          {repository.packages.map((item) => (
+            <button key={item.name} onClick={() => { setPackageDetails(item.name) }} className="bg-palette-3 text-palette-1 rounded-2xl p-2 lg:p-5 flex flex-col gap-2 font-semibold shadow-md shadow-black">
+              <h2 className="text-lg lg:text-xl">{item.name}</h2>
               <h3>{item.version}</h3>
             </button>
           ))}
