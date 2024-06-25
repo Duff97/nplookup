@@ -20,12 +20,12 @@ const PackageInput = () => {
 
   return (
     <motion.div 
-      className='absolute inset-0 lg:flex flex-col lg:flex-row items-center justify-center bg-palette-1 overflow-y-auto px-3 py-10 lg:py-0'
+      className='absolute inset-0 lg:flex flex-col lg:flex-row items-center justify-center bg-palette-1 overflow-y-auto px-3 py-10 lg:py-0 max-w-[1200px] mx-auto'
       initial={{opacity: 1, translateX: 0}}
       exit={{opacity: 0, translateX: '-100%'}}
       transition={{duration:0.5}}
     >
-      <div>
+      <div className="flex flex-col items-center">
         <div className="text-center space-y-3 pb-3">
           <h2 className='text-3xl text-palette-3'>Paste your package.json file</h2>
           <h3 className="text-xl">Get useful details on your project!</h3>
@@ -35,7 +35,7 @@ const PackageInput = () => {
       <div className="relative border-t lg:border-l border-palette-2 h-0 lg:h-full my-10 lg:my-0 w-full lg:w-0 flex justify-center items-center lg:mx-10">
         <p className="relative bg-palette-1 p-2 flex flex-col justify-center lg:-top-0 font-semibold tracking-wide">OR</p>
       </div>
-      <div className="space-y-5">
+      <div className="flex flex-col items-center gap-8">
         <h2 className="text-3xl text-palette-3">Try with a popular open-source repository</h2>
         <div className='flex gap-3 flex-wrap'>
           {previewPackages.map((preview, index) => (
