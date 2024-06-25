@@ -39,7 +39,7 @@ const PackageInput = () => {
         <h2 className="text-3xl text-palette-3">Try with a popular open-source repository</h2>
         <div className='flex gap-3 flex-wrap'>
           {previewPackages.map((preview, index) => (
-            <button key={index} className="bg-palette-3 rounded-xl p-3 text-palette-1 font-semibold font-xl" onClick={() => {handlePreviewSelection(preview.url)}}>
+            <button key={index} className="bg-palette-3 rounded-xl p-3 text-palette-1 font-semibold font-xl shadow-md shadow-black" onClick={() => {handlePreviewSelection(preview.url)}}>
               {preview.name}
             </button>
           ))}
