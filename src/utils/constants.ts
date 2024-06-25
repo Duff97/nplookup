@@ -53,5 +53,21 @@ export const previewPackages : IPreviewPackage[] = [
   {
     name: 'TailwindCSS',
     url: 'https://raw.githubusercontent.com/tailwindlabs/tailwindcss/next/package.json'
+  },
+  {
+    name: 'JQuery',
+    url: 'https://raw.githubusercontent.com/jquery/jquery/main/package.json'
+  },
+  {
+    name: 'Ember',
+    url: 'https://raw.githubusercontent.com/emberjs/ember.js/main/package.json'
+  },
+  {
+    name: 'Meteor',
+    url: 'https://raw.githubusercontent.com/meteor/meteor/devel/package.json'
+  },
+  {
+    name: 'Polymer',
+    url: 'https://raw.githubusercontent.com/Polymer/polymer/master/package.json'
   }
 ]
